@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>TITLE_GOES_HERE</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="card">
+  <input id="name" type="text" placeholder="Username" required>
+  <input id="mail" type="email" placeholder="Email" required>
+  <input id="pass" type="password" placeholder="Password" required>
+  <div class="check">
+  <input type="checkbox" onclick="pass()"/>
+  <p>Show Password</p>
+  </div>
+  <input id="signUp" type="submit">
+  <p>Already have an account? <a href="sign_in.html">Sign In</a></p>
+  </div>
+  <div class="decor"></div>
+</body>
+<script src="main.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgg5h6qqDlfQLJffHaRG7XP4k_giljLw4",
+    authDomain: "postzify-f9f54.firebaseapp.com",
+    databaseURL: "https://postzify-f9f54-default-rtdb.firebaseio.com",
+    projectId: "postzify-f9f54",
+    storageBucket: "postzify-f9f54.appspot.com",
+    messagingSenderId: "711623324421",
+    appId: "1:711623324421:web:254cc5970ab65f2a36fd6c",
+    measurementId: "G-P6PYYZM8YJ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+  
+  signUp.addEventListener('click', (e) => (
+    
+    let mail = document.getElementById('mail').value;
+    let pass = document.getElementById('pass').value;
+    let username = document.getElementById('name').value;
+    
+    createUserWithEmailAndPassword(auth, mail, pass)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        alert('Account Created');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  });
+</script>
+</html>
